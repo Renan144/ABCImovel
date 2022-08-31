@@ -1,0 +1,93 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"]="Adicionar Clientesss";
+
+    List<Business.Consult> customer = ViewBag.Customer;
+    var c = customer[0];
+}
+<div class="text-Left">
+    <div class="text-left">
+        <h1 class="display-6">@ViewData["Title"]</h1>
+        <form name="CustomForm" id="CustomForm" method="post" asp-action="Add" asp-controller="AddCustomer">
+
+            <div id="fcliente">
+                <label for="cliente">:Cliente</label>
+                <input type="text" id="cliente" name="cliente" />
+            </div>
+            <div id="ftipocliente">
+                <label for="tipocliente">:Tipo Cliente</label>
+                <input type="text" id="tipocliente" name="tipocliente" />
+            </div>
+            <div id="fnome">
+                <label for="nome">:Nome</label>
+                <input type="text" id="nome" name="nome" />
+            </div>
+            <div id="ftelefone">
+                <label for="telefone">:Telefone</label>
+                <input type="text" id="telefone" name="telefone" />
+            </div>
+            <div id="fcidade">
+                <label for="cidade">:Cidade</label>
+                <input type="text" id="cidade" name="cidade" />
+            </div>
+            <div id="fbairro">
+                <label for="bairro">:Bairro</label>
+                <input type="text" id="bairro" name="bairro" />
+            </div>
+            <div id="flogradouro">
+                <label for="logradouro">:Logradouro</label>
+                <input type="text" id="logradouro" name="logradouro" />
+            </div>
+            <div id="fdatacad">
+                <label for="datacad">:Data Cadastro</label>
+                <input type="text" id="datacad" name="datacad" />
+            </div>
+            <div id="fdataatt">
+                <label for="dataatt">:Data Atualização</label>
+                <input type="text" id="dataatt" name="dataatt" />
+            </div>
+        </form>
+    </div>
+    @if (customer!=null) {
+        <div class="row" id="row-@c.Id" data="@c.Id">
+            <div class="col-sm" id="id">
+                @c.Id
+            </div>
+            <div class="col-sm-3">
+                @c.Cliente
+            </div>
+            <div class="col-sm-2">
+                @c.TipoCliente
+            </div>
+            <div class="col-sm-2">
+                @c.Nome
+            </div>
+            <div class="col-sm-2">
+                @c.Telefone
+            </div>
+            <div class="col-sm-2">
+                @c.Cidade
+            </div>
+            <div class="col-sm-2">
+                @c.Bairro
+            </div>
+            <div class="col-sm-2">
+                @c.Logradouro
+            </div>
+            <div class="col-sm-2">
+                @c.DataCadastro
+            </div>
+            <div class="col-sm-2">
+                @c.DataAtualizacao
+            </div>
+            <div class="col-sm-1">
+                <a class="btn btn-primary" asp-controller="ViewCustomers" asp-action="Edit" asp-route-id="@c.Id" id="edit_@c.Id">\/</a>
+            </div>
+            <div class="col-sm-1">
+                <a class="btn btn-danger" asp-controller="ViewCustomers" asp-action="Delete" asp-route-id="@c.Id" id="delete_@c.Id">X</a>
+            </div>
+        </div>
+    }
+</div>

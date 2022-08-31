@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"]="Gerenciar Clientes";
+
+    List<Business.Consult> customers = ViewBag.Customers;
+}
+<script type="text/javascript">
+    var customersJs = @UI.Controllers.JSPassController.SerializeObject(Model.Customers);
+    var temp = "";
+    /****/
+    for(i in customersJs) {
+        temp += i+": ";
+        for (j in customersJs[i]) {
+            temp += j+" = " + customersJs[i][j]+", " ;
+        }
+        temp += "; \n";
+    }
+    /*/
+    var validation_messages = {
+        "key_1": {
+            "your_name": "jimmy",
+            "your_msg": "hello world"
+        },
+        "key_2": {
+            "your_name": "billy",
+            "your_msg": "foo equals bar"
+        }
+    }
+    var temp = "";
+    for (i in validation_messages) {
+        temp += i;
+        for (j in validation_messages[i]) {
+            temp += " - " + validation_messages[i][j];
+        }
+        temp += "; ";
+    }
+    /****/
+
+    alert(temp);
+</script>
+<div class="text-Left">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <div class="container text-left" id="resultGrid">
+        <div class="row fw-bold" id="rowHeader">
+            <div class="col-sm-1">
+                Id
+            </div>
+            <div class="col-sm-3">
+                Nome
+            </div>
+            <div class="col-sm-2">
+                Email
+            </div>
+            <div class="col-sm-2">
+                Telefone
+            </div>
+            <div class="col-sm-2">
+                Cidade
+            </div>
+            <div class="col-sm-1">  Editar </div>
+            <div class="col-sm-1">  Apagar </div>
+        </div>
+        @if (customers!=null) {
+            @foreach (var c in customers) {
+
+                <div class="row" id="row-@c.Id" data="@c.Id">
+                    <div class="col-sm-1" id="id">
+                        @c.Id
+                    </div>
+                    <div class="col-sm-3" id="name">
+                        @c.Name
+                    </div>
+                    <div class="col-sm-2" id="email">
+                        @c.Email
+                    </div>
+                    <div class="col-sm-2" id="phone">
+                        @c.Phone
+                    </div>
+                    <div class="col-sm-2" id="city">
+                        @c.City
+                    </div>
+                    <div class="col-sm-1"> <a class="btn btn-primary" asp-controller="ViewCustomers" asp-action="Edit" id="edit-@c.Id">\/</a> </div>
+                    <div class="col-sm-1"> <a class="btn btn-danger" asp-controller="ViewCustomers" asp-action="Delete" id="delete-@c.Id">X</a> </div>
+                </div>
+            }
+
+        }
+    </div>
+</div>

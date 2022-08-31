@@ -1,0 +1,80 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"]="Buscar por cliente";
+        List<Business.Consult> customers = ViewBag.Customers;
+        Console.WriteLine(customers);
+}
+<div class="text-left">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <form name="CustomForm" id="CustomForm" method="post" asp-action="Index" asp-controller="SearchCustomer">
+        <div id="fSelect">
+            <p class="text-left">Selecione um método</p>
+            <select id="select" name="select">
+                <option id="clienteid" value="clienteid">Id</option>
+                <option id="cliente" value="cliente">Cliente</option>
+                <option id="tipocliente" value="tipocliente">Tipo Cliente</option>
+                <option id="nomecontato" selected value="nomecontato">Nome</option>
+                <option id="telefonecontato" value="telefonecontato">Telefone</option>
+                <option id="cidade" value="cidade">Cidade</option>
+                <option id="bairro" value="bairro">Bairro</option>
+                <option id="logradouro" value="logradouro">Logradouro</option>
+                <option id="datacad" value="datacad">Data Cadastro</option>
+                <option id="dataatt" value="dataatt">Data Atualização</option>
+            </select>
+        </div>
+        <div id="fId">
+            <label for="Id">Id</label>
+            <input type="text" id="selTxt" name="selTxt" placeholder="Busca" required="required" />
+        </div>
+        <div>
+            <input type="submit" id="send" class="sub" value="Buscar" />
+        </div>
+    </form>
+
+
+    @if (customers!=null) {
+        @foreach (var c in customers) {
+
+            <div class="row" id="row-@c.Id" data="@c.Id">
+                <div class="col-sm" id="id">
+                    @c.Id
+                </div>
+                <div class="col-sm-3">
+                    @c.Cliente
+                </div>
+                <div class="col-sm-2">
+                    @c.TipoCliente
+                </div>
+                <div class="col-sm-2">
+                    @c.Nome
+                </div>
+                <div class="col-sm-2">
+                    @c.Telefone
+                </div>
+                <div class="col-sm-2">
+                    @c.Cidade
+                </div>
+                <div class="col-sm-2">
+                    @c.Bairro
+                </div>
+                <div class="col-sm-2">
+                    @c.Logradouro
+                </div>
+                <div class="col-sm-2">
+                    @c.DataCadastro
+                </div>
+                <div class="col-sm-2">
+                    @c.DataAtualizacao
+                </div>
+                <div class="col-sm-1">
+                    <a class="btn btn-primary" asp-controller="ViewCustomers" asp-action="Edit" asp-route-id="@c.Id" id="edit_@c.Id">\/</a>
+                </div>
+                <div class="col-sm-1">
+                    <a class="btn btn-danger" asp-controller="ViewCustomers" asp-action="Delete" asp-route-id="@c.Id" id="delete_@c.Id">X</a>
+                </div>
+            </div>
+        }
+    }
+</div>

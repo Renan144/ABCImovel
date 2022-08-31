@@ -1,0 +1,90 @@
+
+a.navbar-brand {
+	white-space: normal;
+	text-align: center;
+	word-break: break-all;
+}
+
+
+.btn-primary {
+	color: #fff;
+	background-color: #1b6ec2;
+	border-color: #1861ac;
+}
+
+html {
+	font-size: 14px;
+}
+
+@media (min-width: 768px) {
+	html {
+		font-size: 16px;
+	}
+}
+
+.border-top {
+	border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+	box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+	font-size: 1rem;
+	line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	/* Margin bottom by footer height */
+	margin-bottom: 60px;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	white-space: nowrap;
+	line-height: 60px; /* Vertically center the text there */
+}
+
+.#menu a, #menu a.active {
+	color: #F99;
+	border-radius: 20px !important;
+}
+
+#menu a:hover {
+	color: #FFF !important;
+	background-color: #999;
+	border: 0px solid #F00;
+	border-radius: 20px !important;
+}
+
+input, select {
+	width: 200px;
+	padding: 10px;
+	color: #000;
+	margin-left: 20px;
+	margin-top: 10px;
+	border-radius: 20px;
+	border: 1px solid #999;
+}
+
+	input:hover, select:hover, select option {
+		border: 1px solid #000;
+	}
+
+form div {
+	padding: 10px
+}

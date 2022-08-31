@@ -1,0 +1,17 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"]="Deletar Clientes";
+
+    List<Business.Consult> customer = ViewBag.Customers;
+}
+<div class="text-left">
+    <h1 class="display-6">@ViewData["Title"]</h1>
+    <div>Tem certeza que deseja apagar o cliente?</div>
+    <div class="col-sm-1">
+        <a asp-controller="ViewCustomers" asp-action="Index" asp-route-id="@ViewBag.Name" id="confirm" class="btn btn-primary">Confirmar</a>
+        <a asp-controller="ViewCustomers" asp-action="Index" asp-route-id="@ViewBag.Id" id="cancel" class="btn btn-danger">Cancelar</a>
+    </div>
+
+</div>
