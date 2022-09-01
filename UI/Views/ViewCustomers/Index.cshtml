@@ -2,89 +2,106 @@
     ViewData["Title"]="Administração de clientes";
 
     List<Business.Consult> customers = ViewBag.Customers;
-}
-<script type="text/javascript">
-    var customersJs = @UI.Controllers.JSPassController.SerializeObject(ViewBag.Customers);
-</script>
-<div class="text-Left">
-    <h1 class="display-4">@ViewData["Title"]</h1>
-    <div class="text-left" id="resultGrid">
-        <div class="row fw-bold" id="rowHeader">
-            <div class="col-sm" id="id">
-                Id
-            </div>
-            <div class="col-sm">
-                Cliente
-            </div>
-            <div class="col-sm">
-                TipoCliente
-            </div>
-            <div class="col-sm">
-                Nome
-            </div>
-            <div class="col-sm">
-                Telefone
-            </div>
-            <div class="col-sm">
-                Cidade
-            </div>
-            <div class="col-sm">
-                Bairro
-            </div>
-            <div class="col-sm">
-                Logradouro
-            </div>
-            <div class="col-sm">
-                Data Cadastro
-            </div>
-            <div class="col-sm">
-                Data Atualização
-            </div>
-            <div class="col-sm-1">  Editar </div>
-            <div class="col-sm-1">  Apagar </div>
-        </div>
-        @if (customers!=null) {
-            @foreach (var c in customers) {
+    var PgTotal = ViewBag.Count/ViewBag.PageLimit;
+    int Page = ViewBag.Page;
+    int PrevPg = Page - 1;
+    int NextPg = Page + 1;
 
-                <div class="row" id="row-@c.Id" data="@c.Id">
-                    <div class="col-sm" id="id">
-                        @c.Id
-                    </div>
-                    <div class="col-sm">
-                        @c.Cliente
-                    </div>
-                    <div class="col-sm">
-                        @c.TipoCliente
-                    </div>
-                    <div class="col-sm">
-                        @c.Nome
-                    </div>
-                    <div class="col-sm">
-                        @c.Telefone
-                    </div>
-                    <div class="col-sm">
-                        @c.Cidade
-                    </div>
-                    <div class="col-sm">
-                        @c.Bairro
-                    </div>
-                    <div class="col-sm">
-                        @c.Logradouro
-                    </div>
-                    <div class="col-sm">
-                        @c.DataCadastro
-                    </div>
-                    <div class="col-sm">
-                        @c.DataAtualizacao
-                    </div>
-                    <div class="col-sm-1">
-                        <a class="btn btn-primary" asp-controller="ViewCustomers" asp-action="Edit" asp-route-id="@c.Id" id="edit_@c.Id">\/</a>
-                    </div>
-                    <div class="col-sm-1">
-                        <a class="btn btn-danger" asp-controller="ViewCustomers" asp-action="Delete" asp-route-id="@c.Id" id="delete_@c.Id">X</a>
-                    </div>
+    <script type="text/javascript">
+        var customersJs = @UI.Controllers.JSPassController.SerializeObject(ViewBag.Customers);
+    </script>
+    <div class="text-Left">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+        <div class="text-left" id="resultGrid">
+            <div class="row fw-bold" id="rowHeader">
+                <div class="col-sm" id="id">
+                    Id
                 </div>
+                <div class="col-sm">
+                    Cliente
+                </div>
+                <div class="col-sm">
+                    TipoCliente
+                </div>
+                <div class="col-sm">
+                    Nome
+                </div>
+                <div class="col-sm">
+                    Telefone
+                </div>
+                <div class="col-sm">
+                    Cidade
+                </div>
+                <div class="col-sm">
+                    Bairro
+                </div>
+                <div class="col-sm">
+                    Logradouro
+                </div>
+                <div class="col-sm">
+                    Data Cadastro
+                </div>
+                <div class="col-sm">
+                    Data Atualização
+                </div>
+                <div class="col-sm-1">  Editar </div>
+                <div class="col-sm-1">  Apagar </div>
+            </div>
+            @if (customers!=null) {
+                @foreach (var c in customers) {
+
+                    <div class="row" id="row-@c.Id" data="@c.Id">
+                        <div class="col-sm" id="id">
+                            @c.Id
+                        </div>
+                        <div class="col-sm">
+                            @c.Cliente
+                        </div>
+                        <div class="col-sm">
+                            @c.TipoCliente
+                        </div>
+                        <div class="col-sm">
+                            @c.Nome
+                        </div>
+                        <div class="col-sm">
+                            @c.Telefone
+                        </div>
+                        <div class="col-sm">
+                            @c.Cidade
+                        </div>
+                        <div class="col-sm">
+                            @c.Bairro
+                        </div>
+                        <div class="col-sm">
+                            @c.Logradouro
+                        </div>
+                        <div class="col-sm">
+                            @c.DataCadastro
+                        </div>
+                        <div class="col-sm">
+                            @c.DataAtualizacao
+                        </div>
+                        <div class="col-sm-1">
+                            <a class="btn btn-primary" asp-controller="ViewCustomers" asp-action="Edit" asp-route-id="@c.Id" id="edit_@c.Id">\/</a>
+                        </div>
+                        <div class="col-sm-1">
+                            <a class="btn btn-danger" asp-controller="ViewCustomers" asp-action="Delete" asp-route-id="@c.Id" id="delete_@c.Id">X</a>
+                        </div>
+                    </div>
+                }
             }
-        }
+            <div class="row-cols-6 align-content-center">
+                <a class="btn-sm alert-dark" asp-controller="ViewCustomers" asp-action="Index" asp-route-page="@PrevPg"> &larr; </a>
+                Pagina
+                @{
+                    for (var i = 1; i<=10; i++) {
+                        <a class="btn-sm alert-dark" asp-controller="ViewCustomers" asp-action="Index" asp-route-page="@i">@i</a>
+                    }
+                }
+                de @PgTotal
+                <a class="btn-sm alert-dark" asp-controller="ViewCustomers" asp-action="Index" asp-route-page="@NextPg">&rarr;</a>
+            </div>
+        </div>
     </div>
-</div>
+
+}
