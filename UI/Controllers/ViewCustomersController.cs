@@ -6,16 +6,29 @@ namespace UI.Controllers {
 	public class ViewCustomersController:Controller {
 		private IConfiguration Config { get; }
 		public IActionResult Index (int? page) {
-			var offset = " ORDER BY clienteid OFFSET 0 ROWS FETCH NEXT 20 ROWS ONLY";
-			if (page!=null) {
-				offset += " ";
+			if (page is null) {
+				page=1;
 			}
+
+			ViewBag.Page=page;
+
+			page=page-1;
+
+			var pagelimit = 10;
+			var pageRows = page * pagelimit;
+			var offset = " ORDER BY clienteid OFFSET "+pageRows+" ROWS FETCH NEXT "+pagelimit+" ROWS ONLY";
+
+			var cTotal = new Consult().CountDb("SELECT count(*) FROM clientes");
+
 			var sql = "SELECT * FROM clientes"+offset;
-			Console.WriteLine(sql);
 			var customers = new Consult().ResultsDb(sql);
 			var passView = new ViewCustomersModel(customers);
-			ViewBag.Customers=customers;
 
+			ViewBag.Customers=customers;
+			ViewBag.Count = cTotal;
+			ViewBag.PageLimit=pagelimit;
+
+			Console.WriteLine(page);
 			return View();
 		}
 
