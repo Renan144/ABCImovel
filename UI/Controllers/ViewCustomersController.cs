@@ -5,15 +5,18 @@ using UI.Models;
 namespace UI.Controllers {
 	public class ViewCustomersController:Controller {
 		private IConfiguration Config { get; }
-		public IActionResult Index () {
-			var customers = new Consult().ResultsDb();
+		public IActionResult Index (int? page) {
+			var offset = " ORDER BY clienteid OFFSET 0 ROWS FETCH NEXT 20 ROWS ONLY";
+			if (page!=null) {
+				offset += " ";
+			}
+			var sql = "SELECT * FROM clientes"+offset;
+			Console.WriteLine(sql);
+			var customers = new Consult().ResultsDb(sql);
 			var passView = new ViewCustomersModel(customers);
 			ViewBag.Customers=customers;
-			/***
-			return View(passView);
-			/*/
+
 			return View();
-			/***/
 		}
 
 		/// <summary>
