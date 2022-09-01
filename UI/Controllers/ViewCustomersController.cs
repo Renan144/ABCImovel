@@ -17,7 +17,7 @@ namespace UI.Controllers {
 			var pagelimit = 10;
 			var pageRows = page * pagelimit;
 			var offset = " ORDER BY clienteid OFFSET "+pageRows+" ROWS FETCH NEXT "+pagelimit+" ROWS ONLY";
-
+			 
 			var cTotal = new Consult().CountDb("SELECT count(*) FROM clientes");
 
 			var sql = "SELECT * FROM clientes"+offset;
