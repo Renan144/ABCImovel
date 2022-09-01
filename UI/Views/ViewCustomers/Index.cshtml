@@ -4,8 +4,9 @@
     List<Business.Consult> customers = ViewBag.Customers;
     var PgTotal = ViewBag.Count/ViewBag.PageLimit;
     int Page = ViewBag.Page;
-    int PrevPg = Page - 1;
-    int NextPg = Page + 1;
+    int PrevPg = Page-1;
+    int NextPg = Page+1;
+    int NPages = 8;
 
     <script type="text/javascript">
         var customersJs = @UI.Controllers.JSPassController.SerializeObject(ViewBag.Customers);
@@ -91,15 +92,42 @@
                 }
             }
             <div class="row-cols-6 align-content-center">
-                <a class="btn-sm alert-dark" asp-controller="ViewCustomers" asp-action="Index" asp-route-page="@PrevPg"> &larr; </a>
+                @if (Page>1) {
+                    <a class="btn-sm alert-dark" asp-controller="ViewCustomers" asp-action="Index" asp-route-page="1">&lArr;</a>
+                    <a class="btn-sm alert-dark" asp-controller="ViewCustomers" asp-action="Index" asp-route-page="@PrevPg">&larr;</a>
+                }
                 Pagina
                 @{
-                    for (var i = 1; i<=10; i++) {
-                        <a class="btn-sm alert-dark" asp-controller="ViewCustomers" asp-action="Index" asp-route-page="@i">@i</a>
+                    int i;
+                    string style;
+                    if (Page>=NPages/2) {
+                        for (i=Page-4; i<Page+NPages-3; i++) {
+                            style="alert-dark";
+                            if (i==Page) {
+                                style="alert-light";
+                            }
+                            if (i<=PgTotal) {
+                                <a class="btn-sm @style" asp-controller="ViewCustomers" asp-action="Index" asp-route-page="@i">@i</a>
+                            }
+                        }
+                    } else {
+                        for (i=1; i<=NPages; i++) {
+                            style="alert-dark";
+                            if (i==Page) {
+                                style="alert-light";
+                            }
+
+                            if (i>0) {
+                                <a class="btn-sm @style" asp-controller="ViewCustomers" asp-action="Index" asp-route-page="@i">@i</a>
+                            }
+                        }
                     }
                 }
                 de @PgTotal
-                <a class="btn-sm alert-dark" asp-controller="ViewCustomers" asp-action="Index" asp-route-page="@NextPg">&rarr;</a>
+                @if (Page<PgTotal) {
+                    <a class="btn-sm alert-dark" asp-controller="ViewCustomers" asp-action="Index" asp-route-page="@NextPg">&rarr;</a>
+                    <a class="btn-sm alert-dark" asp-controller="ViewCustomers" asp-action="Index" asp-route-page="@PgTotal">&rArr;</a>
+                }
             </div>
         </div>
     </div>
