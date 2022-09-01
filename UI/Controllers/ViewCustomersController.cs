@@ -31,18 +31,18 @@ namespace UI.Controllers {
 		/// </summary>
 		/// <returns></returns>
 		[HttpPost]
-		public IActionResult Edit (string id, string cliente, string tipocliente, string nome, string telefone, string cidade, string bairro, string logradouro, string datacad, string dataatt) {
-			var sql = "UPDATE clientes SET"+
-				" cliente='"+cliente+"'"+
-				" tipocliente='"+tipocliente+"'"+
-				" nomecontato='"+nome+"'"+
-				" telefonecontato='"+telefone+"'"+
-				" cidade='"+cidade+"'"+
-				" bairro='"+bairro+"'"+
-				" logradouro='"+logradouro+"'"+
-				" datacadastro='"+datacad+"'"+
-				" dataatualizacao='"+dataatt+"'"+
-				" WHERE id='"+id+"'";
+		public IActionResult Edit (string id, string cliente, string tipocliente, string nomecontato, string telefonecontato, string cidade, string bairro, string logradouro, string datacad, string dataatt) {
+			var sql = "UPDATE clientes SET "+
+					"cliente='"+cliente+"', "+
+					"tipocliente='"+tipocliente+"', "+
+					"nomecontato='"+nomecontato+"', "+
+					"telefonecontato='"+telefonecontato+"', "+
+					"cidade='"+cidade+"', "+
+					"bairro='"+bairro+"', "+
+					"logradouro='"+logradouro+"', "+
+					"datacadastro='"+datacad+"', "+
+					"dataatualizacao='"+dataatt+"' "+
+					"WHERE clienteid='"+id+"'";
 
 			Console.WriteLine(sql);
 			var customers = new Consult().ResultsDb(sql);
