@@ -2,7 +2,9 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"]="Deletar cliente";
+    ViewData["Title"]="Deletar clientee";
+    List<Business.Consult> customers = ViewBag.Customers;
+    Console.WriteLine(customers);
 }
 <div class="text-left">
     <h1 class="display-4">@ViewData["Title"]</h1>
@@ -18,54 +20,85 @@
                 <option id="cidade" value="cidade">Cidade</option>
                 <option id="bairro" value="bairro">Bairro</option>
                 <option id="logradouro" value="logradouro">Logradouro</option>
-                <option id="datacad" value="datacad">Data Cadastro</option>
-                <option id="dataatt" value="dataatt">Data Atualização</option>
+                <option id="datacadastro" value="datacadastro">Data Cadastro</option>
+                <option id="dataatualizacao" value="dataatualizacao">Data Atualização</option>
             </select>
         </div>
         <div id="fId">
             <label for="Id">Id</label>
-            <input type="text" id="selTxt" name="selTxt" placeholder="Busca" required="required" />
+            <input type="text" id="selTxt" name="selTxt" placeholder="Busca" value="@ViewBag.selTxt" required="required" />
         </div>
         <div>
             <input type="submit" id="send" class="sub" value="Buscar" />
         </div>
     </form>
 
-    @if (ViewBag.Success!=null&&ViewBag.Success==true&&ViewBag.Customer!=null) {
-        List<Business.Consult> customer = ViewBag.Customer;
-        var c = customer[0];
-        Console.WriteLine(customer);
 
-        @if (customer[0]!=null) {
+    @if (customers!=null) {
+        <div class="row fw-bold" id="rowHeader">
+            <div class="col-sm" id="id">
+                Id
+            </div>
+            <div class="col-sm">
+                Cliente
+            </div>
+            <div class="col-sm">
+                TipoCliente
+            </div>
+            <div class="col-sm">
+                Nome
+            </div>
+            <div class="col-sm">
+                Telefone
+            </div>
+            <div class="col-sm">
+                Cidade
+            </div>
+            <div class="col-sm">
+                Bairro
+            </div>
+            <div class="col-sm">
+                Logradouro
+            </div>
+            <div class="col-sm">
+                Data Cadastro
+            </div>
+            <div class="col-sm">
+                Data Atualização
+            </div>
+            <div class="col-sm-1">  Editar </div>
+            <div class="col-sm-1">  Apagar </div>
+        </div>
+        @foreach (var c in customers) {
             <div class="row" id="row-@c.Id" data="@c.Id">
                 <div class="col-sm" id="id">
                     @c.Id
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm">
                     @c.Cliente
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm">
                     @c.TipoCliente
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm">
                     @c.Nome
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm">
                     @c.Telefone
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm">
                     @c.Cidade
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm">
                     @c.Bairro
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm">
                     @c.Logradouro
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm">
                     @c.DataCadastro
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm">
                     @c.DataAtualizacao
                 </div>
                 <div class="col-sm-1">
